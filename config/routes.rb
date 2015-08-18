@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   root 'pins#index'
 
   resources :pins
+
+  get '/library' => 'pins#index'
     
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
