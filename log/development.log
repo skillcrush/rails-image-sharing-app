@@ -1,0 +1,196 @@
+  [1m[36mSQL (0.3ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (15.4ms)[0m  CREATE TABLE "pins" ("id" serial primary key, "title" character varying, "url" character varying, "text" text, "slug" character varying, "resource_type" character varying) 
+  [1m[36m (15.2ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL) [0m
+  [1m[35m (2.2ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36m (0.5ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (0.6ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150320022457')
+  [1m[36m (0.5ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150318194553')[0m
+  [1m[35mSQL (0.3ms)[0m  CREATE EXTENSION IF NOT EXISTS "plpgsql"
+  [1m[36m (5.9ms)[0m  [1mCREATE TABLE "pins" ("id" serial primary key, "title" character varying, "url" character varying, "text" text, "slug" character varying, "resource_type" character varying) [0m
+  [1m[35m (3.7ms)[0m  CREATE TABLE "schema_migrations" ("version" character varying NOT NULL) 
+  [1m[36m (1.6ms)[0m  [1mCREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")[0m
+  [1m[35m (0.3ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150320022457')[0m
+  [1m[35m (0.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150318194553')
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mPin Exists (0.8ms)[0m  [1mSELECT  1 AS one FROM "pins" WHERE "pins"."slug" = 'rails-tutorial' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "pins" ("title", "url", "text", "slug", "resource_type") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["title", "Rails Tutorial"], ["url", "https://www.railstutorial.org/"], ["text", "The trusted standard in self-directed introductions to Ruby on Rails. A complete treatment of all the essentials\n    required in most production Rails applications."], ["slug", "rails-tutorial"], ["resource_type", "rails"]]
+  [1m[36m (5.8ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mPin Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "pins" WHERE "pins"."slug" = 'rails-for-zombies' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "pins" ("title", "url", "text", "slug", "resource_type") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["title", "Rails for Zombies"], ["url", "http://railsforzombies.org"], ["text", "A fun, gamified way to hone your Rails skills! Come on...who doesn't like fighting zombies?!"], ["slug", "rails-for-zombies"], ["resource_type", "rails"]]
+  [1m[36m (6.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mPin Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "pins" WHERE "pins"."slug" = 'try-ruby' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "pins" ("title", "url", "text", "slug", "resource_type") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["title", "Try Ruby"], ["url", "http://tryruby.org/"], ["text", "An interactive, in-browser tutorial for the Ruby programming language. A thorough walkthrough of \n    Ruby's nuances, geared toward beginners."], ["slug", "try-ruby"], ["resource_type", "ruby"]]
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mPin Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "pins" WHERE "pins"."slug" = 'ruby-quiz' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "pins" ("title", "url", "text", "slug", "resource_type") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["title", "Ruby Quiz"], ["url", "http://rubyquiz.org"], ["text", "A collection of quizzes on the Ruby programming language."], ["slug", "ruby-quiz"], ["resource_type", "ruby"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mPin Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "pins" WHERE "pins"."slug" = 'ga-ror-for-developers' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "pins" ("title", "url", "text", "slug", "resource_type") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["title", "Ruby on Rails for Developers"], ["url", "https://github.com/generalassembly/ga-ruby-on-rails-for-devs"], ["text", "Somewhat advanced curriculum, but the exercises are also good for anyone who is motivated and \n    self-guided with experience."], ["slug", "ga-ror-for-developers"], ["resource_type", "rails"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mPin Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "pins" WHERE "pins"."slug" = 'ruby-monk' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "pins" ("title", "url", "text", "slug", "resource_type") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["title", "Ruby Monk"], ["url", "http://rubymonk.com"], ["text", "The Ruby Primer is a free interactive book that helps you learn Ruby. Discover Ruby idioms, learn \n    lessons and solve problems, all in your browser!"], ["slug", "ruby-monk"], ["resource_type", "ruby"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+
+
+Started GET "/" for ::1 at 2015-08-17 19:49:25 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PinsController#index as HTML
+  [1m[35mPin Load (0.5ms)[0m  SELECT "pins".* FROM "pins"
+  Rendered pins/index.erb within layouts/application (10.4ms)
+Completed 200 OK in 2802ms (Views: 2784.8ms | ActiveRecord: 3.3ms)
+
+
+Started GET "/assets/cosmo-bootswatch-theme-450effffe2a267bc84c90be0448c1ea9.css?body=1" for ::1 at 2015-08-17 19:49:29 -0700
+
+
+Started GET "/assets/pins-a707063aeac1a1a3694460e481dc1a43.css?body=1" for ::1 at 2015-08-17 19:49:29 -0700
+
+
+Started GET "/assets/jquery-87424c3c19e96d4fb033c10ebe21ec40.js?body=1" for ::1 at 2015-08-17 19:49:29 -0700
+
+
+Started GET "/assets/application-413f78bb403bc2dbda2199f84f8c0dcf.css?body=1" for ::1 at 2015-08-17 19:49:29 -0700
+
+
+Started GET "/assets/jquery_ujs-e27bd20a10d28155845a22d71ef94f2f.js?body=1" for ::1 at 2015-08-17 19:49:29 -0700
+
+
+Started GET "/assets/turbolinks-f87b3583ca50adb0488b031297f5580d.js?body=1" for ::1 at 2015-08-17 19:49:29 -0700
+
+
+Started GET "/assets/application-bc105cf26f847567b5eae624a793b626.js?body=1" for ::1 at 2015-08-17 19:49:29 -0700
+
+
+Started GET "/pins/1" for ::1 at 2015-08-17 19:50:11 -0700
+Processing by PinsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPin Load (0.2ms)[0m  [1mSELECT  "pins".* FROM "pins" WHERE "pins"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  Rendered pins/show.erb within layouts/application (22.6ms)
+Completed 500 Internal Server Error in 45ms
+
+ActionView::Template::Error (undefined local variable or method `pin' for #<#<Class:0x007fe094d7a8a8>:0x007fe0992c0d18>):
+    10:   <hr/>
+    11:   <p>
+    12:     <b>Visit <%= "#{@pin.title}" %> at: </b>
+    13:     <a class="url" href="<%= "#{pin.url}" %>" target="_blank">
+    14:       <%= "#{pin.url}" %>
+    15:     </a>
+    16:   </p>
+  app/views/pins/show.erb:13:in `_app_views_pins_show_erb__4483629623281571341_70301316963120'
+
+
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_source.erb (8.1ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.6ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (33.1ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/web-console-2.1.2/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/web-console-2.1.2/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/web-console-2.1.2/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/web-console-2.1.2/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/web-console-2.1.2/lib/web_console/templates/console.js.erb within layouts/javascript (18.2ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/web-console-2.1.2/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/web-console-2.1.2/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/web-console-2.1.2/lib/web_console/templates/index.html.erb (64.8ms)
+
+
+Started GET "/pins/1" for ::1 at 2015-08-17 19:50:11 -0700
+Processing by PinsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mPin Load (0.3ms)[0m  SELECT  "pins".* FROM "pins" WHERE "pins"."id" = $1 LIMIT 1  [["id", 1]]
+  Rendered pins/show.erb within layouts/application (9.0ms)
+Completed 500 Internal Server Error in 12ms
+
+ActionView::Template::Error (undefined local variable or method `pin' for #<#<Class:0x007fe094d7a8a8>:0x007fe09906ae38>):
+    10:   <hr/>
+    11:   <p>
+    12:     <b>Visit <%= "#{@pin.title}" %> at: </b>
+    13:     <a class="url" href="<%= "#{pin.url}" %>" target="_blank">
+    14:       <%= "#{pin.url}" %>
+    15:     </a>
+    16:   </p>
+  app/views/pins/show.erb:13:in `_app_views_pins_show_erb__4483629623281571341_70301308373540'
+
+
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_source.erb (5.4ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.2ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.6ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (17.5ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/web-console-2.1.2/lib/web_console/templates/_markup.html.erb (0.2ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/web-console-2.1.2/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/web-console-2.1.2/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/web-console-2.1.2/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/web-console-2.1.2/lib/web_console/templates/console.js.erb within layouts/javascript (11.6ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/web-console-2.1.2/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/web-console-2.1.2/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/web-console-2.1.2/lib/web_console/templates/index.html.erb (24.0ms)
+
+
+Started GET "/pins/2" for ::1 at 2015-08-17 19:50:20 -0700
+Processing by PinsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mPin Load (0.3ms)[0m  [1mSELECT  "pins".* FROM "pins" WHERE "pins"."id" = $1 LIMIT 1[0m  [["id", 2]]
+  Rendered pins/show.erb within layouts/application (8.7ms)
+Completed 500 Internal Server Error in 11ms
+
+ActionView::Template::Error (undefined local variable or method `pin' for #<#<Class:0x007fe094d7a8a8>:0x007fe094a66e50>):
+    10:   <hr/>
+    11:   <p>
+    12:     <b>Visit <%= "#{@pin.title}" %> at: </b>
+    13:     <a class="url" href="<%= "#{pin.url}" %>" target="_blank">
+    14:       <%= "#{pin.url}" %>
+    15:     </a>
+    16:   </p>
+  app/views/pins/show.erb:13:in `_app_views_pins_show_erb__4483629623281571341_70301316963120'
+
+
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_source.erb (7.6ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.2ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (25.1ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/web-console-2.1.2/lib/web_console/templates/_markup.html.erb (0.2ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/web-console-2.1.2/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/web-console-2.1.2/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/web-console-2.1.2/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/web-console-2.1.2/lib/web_console/templates/console.js.erb within layouts/javascript (11.2ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/web-console-2.1.2/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/web-console-2.1.2/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/web-console-2.1.2/lib/web_console/templates/index.html.erb (27.0ms)
+
+
+Started GET "/pins/2" for ::1 at 2015-08-17 19:50:20 -0700
+Processing by PinsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[35mPin Load (0.4ms)[0m  SELECT  "pins".* FROM "pins" WHERE "pins"."id" = $1 LIMIT 1  [["id", 2]]
+  Rendered pins/show.erb within layouts/application (8.4ms)
+Completed 500 Internal Server Error in 12ms
+
+ActionView::Template::Error (undefined local variable or method `pin' for #<#<Class:0x007fe094d7a8a8>:0x007fe092fc6c80>):
+    10:   <hr/>
+    11:   <p>
+    12:     <b>Visit <%= "#{@pin.title}" %> at: </b>
+    13:     <a class="url" href="<%= "#{pin.url}" %>" target="_blank">
+    14:       <%= "#{pin.url}" %>
+    15:     </a>
+    16:   </p>
+  app/views/pins/show.erb:13:in `_app_views_pins_show_erb__4483629623281571341_70301308373540'
+
+
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_source.erb (7.7ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.1ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (21.4ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/web-console-2.1.2/lib/web_console/templates/_markup.html.erb (0.2ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/web-console-2.1.2/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/web-console-2.1.2/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/web-console-2.1.2/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/web-console-2.1.2/lib/web_console/templates/console.js.erb within layouts/javascript (15.2ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/web-console-2.1.2/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/web-console-2.1.2/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/maxono/.rvm/gems/ruby-2.1.3/gems/web-console-2.1.2/lib/web_console/templates/index.html.erb (28.9ms)

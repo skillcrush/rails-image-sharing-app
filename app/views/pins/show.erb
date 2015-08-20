@@ -1,5 +1,6 @@
 <div class="header">
   <h1>
+    <i class="fa fa-laptop"></i>
     <%= "#{@pin.title}" %>
   </h1>
 </div>
@@ -10,12 +11,13 @@
   <hr/>
   <p>
     <b>Visit <%= "#{@pin.title}" %> at: </b>
-    <a class="url" href="<%= "#{pin.url}" %>" target="_blank">
-      <%= "#{pin.url}" %>
+    <a class="url" href="<%= "#{@pin.url}" %>" target="_blank">
+      <%= "#{@pin.url}" %>
     </a>
   </p>
 </div>
 <br/>
 <a href="/">
+  <i class="fa fa-arrow-circle-o-left"></i>
   Back to Home
 </a>
