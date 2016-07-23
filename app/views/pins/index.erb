@@ -11,9 +11,9 @@
           <div class="pin">
             <div class="pin-header row">
 	     <div class="logo-thumbnail col-xs-3">
-	      <% if "#{pin.resource_type}" == "rails" %>
+	      <% if "#{pin.category_id}" == "rails" %>
 		<%= image_tag('rails-logo-thumbnail.png') %>
-	      <% elsif "#{pin.resource_type}" == "ruby" %>
+	      <% elsif "#{pin.category_id}" == "ruby" %>
 		<%= image_tag('ruby-logo-thumbnail.png') %>
 	      <%end%>
 	     </div>
