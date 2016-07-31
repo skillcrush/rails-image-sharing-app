@@ -1,6 +1,8 @@
 require 'spec_helper'
 RSpec.describe PinsController do
 
+  
+
 describe "GET index" do
 	it "renders the index template" do
 		get :index
@@ -81,5 +83,51 @@ describe "GET new" do
     end    
     
   end
+
+
+describe "GET edit" do
+
+  before(:each) do
+    @pin = Pin.first
+  end
+
+it "responds with success" do
+	get :edit, id: @pin.id
+	expect(response.success?).to be(true)
+end
+
+it 'renders the edit view' do
+      get :edit, id: @pin.id     
+      expect(response).to render_template(:edit)
+    end
+
+it "assigns an instance variable called @pin to the Pin with the appropriate id" do
+      get :edit, id: @pin.id 
+      expect(assigns(:pin)).to eq(@pin)
+    end
+
+
+end
+
+describe "PUT update" do
+before(:each) do
+    @pin = Pin.first
+    @pin_hash = { title: @pin.title,
+      url: @pin.url,
+      slug: @pin.slug,
+      category_id: @pin.category_id,
+      text: @pin.text }
+  end
+
+#works for a valid edit
+
+  it 'responds with a redirect' do
+      post :update, pin: @pin_hash, id: @pin.id
+      expect(response.redirect?).to be(true)
+    end
+
+end
+
+
 
 end

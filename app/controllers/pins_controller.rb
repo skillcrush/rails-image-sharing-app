@@ -3,7 +3,24 @@ class PinsController < ApplicationController
   def index
     @pins = Pin.all
   end
+
+  def edit
+     @pin = Pin.find(params[:id])
+  end
   
+  def update
+	@pin = Pin.find(params[:id])
+	if @pin.update_attributes(pin_params)
+		if @pin.valid?
+		@pin.save
+		redirect_to pin_path(@pin)
+		end
+	else
+		@errors = @pin.errors
+		render :edit
+	end	
+  end
+
   def show
     @pin = Pin.find(params[:id])
   end
@@ -28,9 +45,13 @@ class PinsController < ApplicationController
 	end
   end
 
+  
+
+
+
 private
 
   def pin_params
-    params.require(:pin).permit(:title, :url, :slug, :text, :category_id)
+    params.require(:pin).permit(:title, :url, :slug, :text, :category_id, :image)
   end
 end

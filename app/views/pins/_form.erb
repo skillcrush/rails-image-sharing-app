@@ -1,0 +1,77 @@
+
+<div class = form_group>
+  <%= form_for(@pin, multipart: true) do |f| %>
+    <div class ="row form-row">
+      <div class="col-xs-1">
+        <label for="pin_title">Title</label>
+      </div>
+      <div class="col-xs-2">
+        <%= f.text_field :title %>
+      </div>
+    </div>
+
+    <div class ="row form-row">
+      <div class="col-xs-1">
+        <label for="pin_url">URL</label>
+      </div>
+      <div class="col-xs-2">
+        <%= f.text_field :url %>
+      </div>
+    </div>
+
+    <div class ="row form-row">
+      <div class="col-xs-1">
+        <label for="pin_slug">Slug</label>
+      </div>
+      <div class="col-xs-2">
+	<%= f.text_field :slug %>
+      </div>
+    </div>
+
+    <div class ="row form-row">
+      <div class="col-xs-1">
+	<label for="pin_category_id">Category</label>
+      </div>
+      <div class="col-xs-2">
+	<%= f.collection_select(:category_id, Category.all, :id, :name) %>
+      </div>
+    </div>
+
+    <div class ="row form-row">
+      <div class="col-xs-1">
+	<label for="pin_description">Descripton</label>
+      </div>
+      <div class="col-xs-2">
+	<%= f.text_area :text %>
+      </div>
+    </div>
+
+    <div class ="row form-row">
+      <div class="col-xs-1">
+  <label for="pin_image">Image</label>
+      </div>
+      <div class="col-xs-2">
+  <%= f.file_field :image %>
+      </div>
+    </div>
+
+
+  <div class ="row form-row">
+    <div class="col-xs-2 col-xs-offset-1">
+	<%= f.button %>
+    </div>
+   </div>
+
+<% end %>
+</div>
+
+<% if !@errors.nil? %>
+	<div class="error">
+		<label><%= pluralize(@errors.count, "error") %> prohibited this pin from being saving:</label>
+		<ul>
+			<% @errors.full_messages.each do |msg| %>
+				<li><%= "#{msg}" %></li>
+			<%end%>
+		</ul>
+	</div>
+<%end%>
