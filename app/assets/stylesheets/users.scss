@@ -1,0 +1,39 @@
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.table-users {
+text-align: center;
+width: 30%;
+margin: 50px auto;
+}
+
+th {
+border-bottom: 2px solid #008080;
+padding: 10px;
+text-align: center;
+color: #008080;
+vertical-align: middle;
+font-size: 16px;
+}
+
+td {
+border-bottom: 1px solid #708090;
+color: #708090;
+padding: 8px 8px;
+
+text-align: center;
+vertical-align: middle;
+font-size: 14px;
+}
+
+
+.table-users td a {
+text-decoration: none;
+color: #708090;
+}
+
+.new {
+	text-align: center;
+}

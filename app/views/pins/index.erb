@@ -10,21 +10,18 @@
         <div class="pin-container col-md-4">
           <div class="pin">
             <div class="pin-header row">
-	     <div class="logo-thumbnail col-xs-3">
-       
-	      <% if pin.category_id == 2 %>
-		<%= image_tag('rails-logo-thumbnail.png') %>
-	      <% elsif pin.category_id == 1 %>
-		<%= image_tag('ruby-logo-thumbnail.png') %>
-    
-	      <%end%>
-	     </div>
-	     <div class="col-xs-9">
-              <h4>
-		<%= link_to "#{pin.title}", pin_by_name_path(slug: pin.slug) %>
+       <div class="logo-thumbnail col-xs-3">
+ <% if pin.category_id == 2 %>
+    <%= image_tag('rails-logo-thumbnail.png') %>
+        <% elsif pin.category_id == 1 %>
+    <%= image_tag('ruby-logo-thumbnail.png') %>
+        <%end%>
+       </div>
+       <div class="col-xs-9">
+              <h4><%= link_to "#{pin.title}", pin_by_name_path(slug: pin.slug) %>
               </h4>
-		<%= link_to "#{pin.url}", pin.url, html_options = {target: "_blank", class: "url"} %>
-	     </div>
+    <%= link_to "#{pin.url}", pin.url, html_options = {target: "_blank", class: "url"} %>
+       </div>
             </div>
             <hr/>
             <p class="text"><%= "#{pin.text}" %></p>

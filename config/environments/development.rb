@@ -39,8 +39,9 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
-  Paperclip.options[:command_path] = "C:\Windows\System32\convert.exe"
-  Paperclip.options[:command_path] = "C:\Program Files (x86)\GnuWin32\bin"
+  Paperclip.options[:command_path] = "C:/Windows/System32/convert.exe"
+  Paperclip.options[:command_path] = "C:/Program Files (x86)/GnuWin32/bin"
+
 
   config.paperclip_defaults = {
     :storage => :s3,
@@ -50,4 +51,5 @@ Rails.application.configure do
       :secret_access_key => "IvlaFyn5pVw/giiz/JUGz86ZV0K0MazmLQCXsTeo"
     }
   }
+
 end
