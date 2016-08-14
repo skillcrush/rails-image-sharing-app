@@ -26,10 +26,31 @@
     <b>Visit <%= "#{@pin.title}" %> at: </b>
     <%= link_to "#{@pin.url}", @pin.url, html_options = {target: "_blank", class: "url"} %>
   </p>
+  <%= link_to repin_path(@pin), class: "btn btn-default repin", method: "post" do %>
+  <i class="fa fa-thumb-tack" aria-hidden="true"></i>
+  Repin!
+<% end %> 
   </div>
 </div>
-<br/>
+</div>
+
+ <br/>
 <a href="/">
   <i class="fa fa-chevron-circle-left" aria-hidden="true"></i>
   Back to Home
 </a>
+<hr/>
+<div class="header">
+  <h3>
+    This pin has been pinned by:
+    </h3>
+    <div>
+      <% @users.each do |user| %>
+        <ul>
+          <li><%= "#{user.first_name} #{user.last_name}" %></li>
+        </ul>
+        <%end%>
+    </div>
+</div>
+
+

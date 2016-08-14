@@ -1,11 +1,67 @@
-<p id="notice"><%= notice %></p>
+<!--<p id="notice"><%= notice %></p>-->
 
 
 <div class="header">
   <h1>
     <%= "#{@user.first_name} #{@user.last_name}" %>
+    <h3>Your Pins</h3>
   </h1>
 </div>
+
+<hr/>
+
+<div class="pins">
+  <% @pins.each_slice(3) do |row| %>
+    <div class="row">
+      <% row.each do |pin| %>      
+        <div class="pin-container col-md-4">
+          <div class="pin">
+            <div class="pin-header row">
+
+       <div class="logo-thumbnail col-xs-3">
+ <% if pin.category_id == 2 %>
+    <%= image_tag('rails-logo-thumbnail.png') %>
+        <% elsif pin.category_id == 1 %>
+    <%= image_tag('ruby-logo-thumbnail.png') %>
+        <%end%>
+       </div>
+
+       <div class="col-xs-9">
+              <h4><%= link_to "#{pin.title}", pin_by_name_path(slug: pin.slug) %>
+              </h4>
+    <%= link_to "#{pin.url}", pin.url, html_options = {target: "_blank", class: "url"} %>
+       </div>
+
+
+            </div>
+            <hr/>
+            <div>
+            <p class="text"><%= "#{pin.text}" %></p>
+            </div>
+
+            <div>
+            <%= link_to repin_path(pin), class: "btn btn-default repin", method: "post" do %>
+            <i class="fa fa-thumb-tack" aria-hidden="true"></i>
+                  Repin!
+                  <%end%>
+                </div>
+            
+          </div>    
+
+        </div>
+      <%end%>
+    </div>
+  <%end%>
+</div>
+
+<hr/>
+
+
+<!--
+
+
+
+
 
 <p>
   <strong>First name:</strong>
@@ -22,16 +78,13 @@
   <%= @user.email %>
 </p>
 
-<p>
-  <strong>Password:</strong>
-  <%= @user.password %>
-</p>
-
 <div>
 <i class="fa fa-pencil-square" aria-hidden="true"></i>
 <%= link_to 'Edit', edit_user_path(@user) %>
 </div>
 <div>
 <i class="fa fa-chevron-circle-left" aria-hidden="true"></i>
-<%= link_to 'Back', users_path %>
+<%= link_to 'Back', users_path(@user) %>
 </div>
+
+-->

@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   get '/signup' => "users#new", as: :signup
   get '/login' => "users#login", as: :login
   post '/login' => "users#authenticate"
+  delete '/logout:id' => "users#logout", as: :logout
+  post "pins/repin/:id" => "pins#repin", as: 'repin'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -13,6 +15,8 @@ Rails.application.routes.draw do
   resources :pins
 
   get '/library' => "pins#index"
+
+  
   
     
   # Example of regular route:

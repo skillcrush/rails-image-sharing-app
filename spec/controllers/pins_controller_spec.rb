@@ -1,7 +1,17 @@
 require 'spec_helper'
 RSpec.describe PinsController do
 
-  
+before(:each) do
+  @user = FactoryGirl.create(:user)
+  login(@user)
+  @pin = FactoryGirl.create(:pin)
+end
+
+after(:each) do
+  if !@user.destroyed?
+    @user.destroy
+  end
+end
 
 describe "GET index" do
 	it "renders the index template" do
@@ -13,6 +23,12 @@ describe "GET index" do
 		get :index
 		expect(assigns[:pins]).to eq(Pin.all)
 	end
+
+  it "redirects to login if user is not signed in" do
+      logout(@user)
+      get :index
+      expect(response).to redirect_to(:login)
+    end
 end
 
 describe "GET new" do
@@ -29,6 +45,12 @@ describe "GET new" do
     it 'assigns an instance variable to a new pin' do
       get :new
       expect(assigns(:pin)).to be_a_new(Pin)
+    end
+
+    it "redirects to login if user is not signed in" do
+      logout(@user)
+      get :new
+      expect(response).to redirect_to(:login)
     end
   end
   
@@ -80,33 +102,35 @@ describe "GET new" do
       @pin_hash.delete(:title)
       post :create, pin: @pin_hash
       expect(assigns[:errors].present?).to be(true)
-    end    
-    
+    end  
   end
 
 
 describe "GET edit" do
-
   before(:each) do
     @pin = Pin.first
   end
 
-it "responds with success" do
-	get :edit, id: @pin.id
-	expect(response.success?).to be(true)
-end
+  it "responds with success" do
+	 get :edit, id: @pin.id
+	 expect(response.success?).to be(true)
+  end
 
-it 'renders the edit view' do
+  it 'renders the edit view' do
       get :edit, id: @pin.id     
       expect(response).to render_template(:edit)
-    end
+  end
 
-it "assigns an instance variable called @pin to the Pin with the appropriate id" do
+  it "assigns an instance variable called @pin to the Pin with the appropriate id" do
       get :edit, id: @pin.id 
       expect(assigns(:pin)).to eq(@pin)
-    end
+  end
 
-
+  it "redirects to login if user is not signed in" do
+      logout(@user)
+      get :edit, id: @pin.id 
+      expect(response).to redirect_to(:login)
+  end
 end
 
 describe "PUT update" do
@@ -124,10 +148,45 @@ before(:each) do
   it 'responds with a redirect' do
       post :update, pin: @pin_hash, id: @pin.id
       expect(response.redirect?).to be(true)
-    end
+  end
+
+#doesn't work for an invalid edit
+
+  #it '' do
+  #end
 
 end
 
+describe "POST repin" do
+  before(:each) do
+    @user = FactoryGirl.create(:user)
+    login(@user)
+    @pin = FactoryGirl.create(:pin)
+  end
+
+    after(:each) do
+      pin = Pin.find_by_slug("rails-wizard")
+      if !pin.nil?
+        pin.destroy
+      end
+      logout(@user)
+    end
+
+    it 'responds with a redirect' do
+      post :repin, pin: @pin, id: @pin.id
+      expect(response.redirect?).to be(true)
+    end
+
+    it 'creates a user.pin' do
+      post :repin, pin: @pin, id: @pin.id, user: @user
+      expect(@user.pins(:id).present?).to be(true)
+    end
+
+    it 'redirects to the user show page' do
+      post :repin, pin: @pin, id: @pin.id, user: @user
+      expect(response).to redirect_to(user_path(@user.id))
+    end
+end
 
 
 end

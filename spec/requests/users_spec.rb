@@ -1,5 +1,6 @@
-require 'rails_helper'
+require 'spec_helper'
 
+=begin
 RSpec.describe "Users", type: :request do
   describe "GET /users" do
     it "works! (now write some real specs)" do
@@ -8,3 +9,4 @@ RSpec.describe "Users", type: :request do
     end
   end
 end
+=end

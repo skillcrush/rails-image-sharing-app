@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe User, type: :model do
   	before(:all) do
-  		@user = User.create(email: "coder@skillcrush", password: "password")
+  		@user = User.create(first_name: "Skill", last_name: "Crush", email: "coder@skillcrush", password: "password")
 	end
  
 	after(:all) do

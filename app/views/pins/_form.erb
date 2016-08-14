@@ -1,6 +1,7 @@
 
 <div class = form_group>
   <%= form_for(@pin, multipart: true) do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
     <div class ="row form-row">
       <div class="col-xs-1">
         <label for="pin_title">Title</label>

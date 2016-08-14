@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :require_login, only: [:show, :edit, :update, :destroy]
 
   # GET /users
   # GET /users.json
@@ -10,25 +10,35 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @pins = current_user.pins.all
   end
 
   def login
   end
 
-  def authenticate
-    @user = User.authenticate(params[:email], params[:password])
-    if !@user.nil?
-      redirect_to @user
-    else
-      @error = "Your email or password is incorrect. Please try again."
-      render :login
-    end
-  end
-
-  # GET /users/new
+ # GET /users/new
   def new
     @user = User.new
   end
+
+  def authenticate
+    @user = User.authenticate(params[:email], params[:password])
+    if @user.nil?
+      @error = "Your email or password is incorrect. Please try again."
+      render :login      
+    else
+      session[:user_id] = @user.id    
+      redirect_to user_path(@user)
+    end
+  end
+
+  #logout
+  def logout
+    session.delete(:user_id)
+    redirect_to login_path
+  end
+
+ 
 
   # GET /users/1/edit
   def edit
@@ -76,6 +86,8 @@ class UsersController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+   
+
     def set_user
       @user = User.find(params[:id])
     end
