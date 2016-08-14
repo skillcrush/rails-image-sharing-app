@@ -32,7 +32,7 @@ describe "GET index" do
 end
 
 describe "GET new" do
-    it 'responds with successfully' do
+    it 'responds with success' do
       get :new
       expect(response.success?).to be(true)
     end
@@ -134,26 +134,48 @@ describe "GET edit" do
 end
 
 describe "PUT update" do
-before(:each) do
-    @pin = Pin.first
+
+  before(:each) do
+    @pin = Pin.last
     @pin_hash = { title: @pin.title,
-      url: @pin.url,
+      url: "newurl.com",
       slug: @pin.slug,
       category_id: @pin.category_id,
-      text: @pin.text }
+      text: @pin.text,
+      image: Rack::Test::UploadedFile.new(Rails.root.join('app/assets/images/rails-logo-thumbnail.png'), 'image/png'), 
+      user_id: @pin.user_id }
   end
 
-#works for a valid edit
-
-  it 'responds with a redirect' do
-      post :update, pin: @pin_hash, id: @pin.id
+    it 'responds with a redirect' do
+      put :update, pin: @pin_hash, id: @pin.id
       expect(response.redirect?).to be(true)
-  end
+    end
+   
+    it 'updates a pin' do
+      put :update, pin: @pin_hash, id: @pin.id 
+      @pin.reload
+      expect(@pin.url).to eq(@pin_hash[:url])
+    end
+  
+    it 'redirects to the show view' do
+      put :update, pin: @pin_hash, id: @pin.id 
+      @pin.reload
+      expect(response).to redirect_to(pin_path(assigns(:pin)))
+    end
 
 #doesn't work for an invalid edit
 
-  #it '' do
-  #end
+  it 'assigns the @errors instance variable on error' do
+      @pin_hash[:url] = ""
+      put :update, pin: @pin_hash, id: @pin.id
+      expect(assigns[:errors].present?).to be(true)
+  end
+
+  it "re-renders the 'edit' template" do
+        @pin_hash[:url] = ""
+        put :update, pin: @pin_hash, id: @pin.id
+        expect(response).to render_template(:edit)
+      end
 
 end
 
@@ -164,13 +186,13 @@ describe "POST repin" do
     @pin = FactoryGirl.create(:pin)
   end
 
-    after(:each) do
-      pin = Pin.find_by_slug("rails-wizard")
-      if !pin.nil?
-        pin.destroy
-      end
-      logout(@user)
+  after(:each) do
+    pin = Pin.find_by_slug("rails-wizard")
+    if !pin.nil?
+      pin.destroy
     end
+    logout(@user)
+  end
 
     it 'responds with a redirect' do
       post :repin, pin: @pin, id: @pin.id
