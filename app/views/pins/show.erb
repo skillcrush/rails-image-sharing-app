@@ -26,11 +26,12 @@
     <b>Visit <%= "#{@pin.title}" %> at: </b>
     <%= link_to "#{@pin.url}", @pin.url, html_options = {target: "_blank", class: "url"} %>
   </p>
-  <%= link_to repin_path(@pin), class: "btn btn-default repin", method: "post" do %>
-  <i class="fa fa-thumb-tack" aria-hidden="true"></i>
-  Repin!
-<% end %> 
+    <%= render partial: "shared/repin_form", locals: {pin: @pin} %>  
+
   </div>
+
+
+
 </div>
 </div>
 

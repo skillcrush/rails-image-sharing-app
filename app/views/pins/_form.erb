@@ -57,14 +57,30 @@
     </div>
 
 
+  
+
+   <%= f.fields_for :pinning do |p| %>
+  <div class="form-group">
   <div class ="row form-row">
+      <div class="col-xs-1">
+    <label>Which board?</label>
+    </div>
+      <div class="col-xs-2">
+    <%= p.collection_select(:board_id, current_user.boards, :id, :name, {}, {class: "form-control"}) %>
+    </div>
+    </div>
+    <%= p.hidden_field :user_id, value: current_user.id %> 
+    </div>   
+<% end %>
+<div class ="row form-row">
     <div class="col-xs-2 col-xs-offset-1">
-	<%= f.button %>
+  <%= f.button %>
     </div>
    </div>
-
 <% end %>
 </div>
+
+
 
 <% if !@errors.nil? %>
 	<div class="error">

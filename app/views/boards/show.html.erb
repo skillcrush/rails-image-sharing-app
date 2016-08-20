@@ -1,0 +1,15 @@
+
+<div class="header">
+  <h1>
+    <%= "#{@board.name}" %>
+  </h1>
+</div>
+
+<hr/>
+
+<%= render partial: "shared/pins_list" %>
+
+<hr/>
+
+<%= link_to 'Edit', edit_board_path(@board) %> |
+<%= link_to 'Back', boards_path %>

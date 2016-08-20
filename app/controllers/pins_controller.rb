@@ -42,6 +42,10 @@ class PinsController < ApplicationController
 	@pin = Pin.create(pin_params)
 	if @pin.valid?
 	  @pin.save
+    if params[:pin][:pinning][:board_id]
+      board = Board.find(params[:pin][:pinning][:board_id])
+      @pin.pinnings.create!(user: current_user, board: board)
+    end
 	  redirect_to pin_path(@pin)
 	else
 	  @errors = @pin.errors	
@@ -58,6 +62,6 @@ class PinsController < ApplicationController
 private
 
   def pin_params
-    params.require(:pin).permit(:title, :url, :slug, :text, :category_id, :image, :user_id)
+    params.require(:pin).permit(:title, :url, :slug, :text, :category_id, :image, :user_id, :board_id)
   end
 end

@@ -9,11 +9,38 @@
 </head>
 <body>
   <div class="container">
-  	<% if !current_user.nil? && !current_user.id.nil? %>
-  	<div class="pull-right">	
-  		<h3><%= "Hi #{current_user.first_name}!" %>
-  		<%= link_to "Logout", logout_path(current_user), method: :delete %></h3>
-  	</div>
+  	<% if logged_in? %>
+
+  	<div class="dropdown">
+ 
+    <button id="dropdownMenu1" class="btn btn-default dropdown-toggle pull-right" type="button" data-toggle="dropdown" aria-expanded="true"><%= "#{current_user.first_name} " %><span class="caret"></span></button>
+ 
+    <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dropdownMenu1">
+
+    <% current_user.boards.each do |board| %>
+        <li role="presentation">
+        <a role="menuitem" tabindex="-1" href="/boards/<%= board.id %>">
+        <%= board.name %></a></li>
+        <%end%>
+
+        <li role="presentation" class="divider"></li>
+        <li role="presentation">
+          <%= link_to "Add a Pin", new_pin_path, "role" => "menuitem", "tabindex" => "-1" %></li>
+
+        <li role="presentation" class="divider"></li>
+        <li role="presentation">
+          <%= link_to "Add a Board", new_board_path, "role" => "menuitem", "tabindex" => "-1" %></li>
+
+        <li role="presentation" class="divider"></li>
+        <li role="presentation">
+          <%= link_to "Home", root_path, "role" => "menuitem", "tabindex" => "-1" %></li>
+
+        <li role="presentation" class="divider"></li>
+        <li role="presentation">
+          <%= link_to "Logout", logout_path(current_user), :method => :delete, "role" => "menuitem", "tabindex" => "-1" %></li>
+    </ul>
+ 
+</div>
   	<%end%>
 
 

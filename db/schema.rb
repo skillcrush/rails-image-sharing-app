@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160814150556) do
+ActiveRecord::Schema.define(version: 20160814212857) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "boards", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "boards", ["user_id"], name: "index_boards_on_user_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -25,8 +34,10 @@ ActiveRecord::Schema.define(version: 20160814150556) do
     t.integer  "pin_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "board_id"
   end
 
+  add_index "pinnings", ["board_id"], name: "index_pinnings_on_board_id", using: :btree
   add_index "pinnings", ["pin_id"], name: "index_pinnings_on_pin_id", using: :btree
   add_index "pinnings", ["user_id"], name: "index_pinnings_on_user_id", using: :btree
 
@@ -55,6 +66,7 @@ ActiveRecord::Schema.define(version: 20160814150556) do
     t.string   "password_digest"
   end
 
+  add_foreign_key "boards", "users"
   add_foreign_key "pinnings", "pins"
   add_foreign_key "pinnings", "users"
   add_foreign_key "pins", "users"
