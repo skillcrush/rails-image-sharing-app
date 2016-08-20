@@ -3,7 +3,7 @@ class Pin < ActiveRecord::Base
   validates_uniqueness_of :slug
 belongs_to :category
 belongs_to :user
-has_many :pinnings
+has_many :pinnings, dependent: :destroy
 has_many :users, through: :pinnings
 
 has_attached_file :image, style: { medium: "300x300", thumb: "60x60" }, default_url: "https://placebear.com/300/300"

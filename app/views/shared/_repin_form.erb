@@ -1,6 +1,6 @@
 <% if logged_in? %>
 
-<%= form_for :pin, url: repin_path(:pin), method: "post" do |f| %>
+<%= form_for pin, url: repin_path(pin), method: "post" do |f| %>
   <%= f.fields_for :pinning do |p| %>
     <div class="form-group">
       <label>Repin to one of your boards?</label>

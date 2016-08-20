@@ -1,5 +1,5 @@
 class BoardsController < ApplicationController
-  before_action :require_login, only: [:show, :edit, :update, :destroy]
+  before_action :require_login, only: [:new, :show, :edit, :update, :destroy]
 
   # GET /boards
   # GET /boards.json

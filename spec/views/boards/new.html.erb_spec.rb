@@ -1,11 +1,13 @@
-require 'rails_helper'
+require 'spec_helper'
 
 RSpec.describe "boards/new", type: :view do
   before(:each) do
+    @user = FactoryGirl.create(:user)
     assign(:board, Board.new(
       :name => "MyString",
-      :user => nil
+      :user => @user
     ))
+    login(@user)
   end
 
   it "renders new board form" do

@@ -3,12 +3,15 @@ RSpec.describe PinsController do
 
 before(:each) do
   @user = FactoryGirl.create(:user)
+  @board = @user.boards.first
   login(@user)
   @pin = FactoryGirl.create(:pin)
 end
 
 after(:each) do
   if !@user.destroyed?
+    @user.pinnings.destroy_all
+    @user.boards.destroy_all
     @user.destroy
   end
 end
@@ -61,12 +64,16 @@ describe "GET new" do
         url: "http://railswizard.org", 
         slug: "rails-wizard", 
         text: "A fun and helpful Rails Resource",
-        category_id: "rails"}    
+        category_id: "rails",
+        user_id: @user.id,
+        pinning: {board_id: @board.id, user_id: @user.id}
+      }    
     end
     
     after(:each) do
       pin = Pin.find_by_slug("rails-wizard")
       if !pin.nil?
+        
         pin.destroy
       end
     end

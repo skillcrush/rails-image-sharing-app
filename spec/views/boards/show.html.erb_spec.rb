@@ -1,11 +1,11 @@
-require 'rails_helper'
+require 'spec_helper'
 
 RSpec.describe "boards/show", type: :view do
   before(:each) do
-    @board = assign(:board, Board.create!(
-      :name => "Name",
-      :user => nil
-    ))
+    @user = FactoryGirl.create(:user)
+    @board = @user.boards.first
+    @pins = @board.pins
+    login(@user)
   end
 
   it "renders attributes in <p>" do

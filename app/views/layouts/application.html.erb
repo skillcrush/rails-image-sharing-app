@@ -13,7 +13,8 @@
 
   	<div class="dropdown">
  
-    <button id="dropdownMenu1" class="btn btn-default dropdown-toggle pull-right" type="button" data-toggle="dropdown" aria-expanded="true"><%= "#{current_user.first_name} " %><span class="caret"></span></button>
+    <button id="dropdownMenu1" class="btn btn-default dropdown-toggle pull-right" type="button" data-toggle="dropdown" aria-expanded="true">
+    <%= "#{current_user.first_name} " %><span class="caret"></span></button>
  
     <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dropdownMenu1">
 
@@ -21,7 +22,7 @@
         <li role="presentation">
         <a role="menuitem" tabindex="-1" href="/boards/<%= board.id %>">
         <%= board.name %></a></li>
-        <%end%>
+    <%end%>
 
         <li role="presentation" class="divider"></li>
         <li role="presentation">
