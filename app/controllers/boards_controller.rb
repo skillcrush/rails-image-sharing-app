@@ -1,5 +1,5 @@
 class BoardsController < ApplicationController
-  before_action :require_login, only: [:new, :show, :edit, :update, :destroy]
+  before_action :require_login, only: [:new, :create, :edit, :update, :destroy]
 
   # GET /boards
   # GET /boards.json
@@ -10,7 +10,7 @@ class BoardsController < ApplicationController
   # GET /boards/1
   # GET /boards/1.json
   def show
-    @board = current_user.boards.find(params[:id])
+    @board = Board.find(params[:id])
     @pins = @board.pins
   end
 
@@ -21,13 +21,14 @@ class BoardsController < ApplicationController
 
   # GET /boards/1/edit
   def edit
+    @board = Board.find(params[:id])
+    @followers = current_user.user_followers
   end
 
   # POST /boards
   # POST /boards.json
   def create
     @board = Board.new(board_params)
-
     respond_to do |format|
       if @board.save
         format.html { redirect_to @board, notice: 'Board was successfully created.' }
@@ -71,6 +72,6 @@ class BoardsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def board_params
-      params.require(:board).permit(:name, :user_id)
+      params.require(:board).permit(:name, :user_id, board_pinners_attributes: [:user_id, :board_id])
     end
 end

@@ -66,7 +66,7 @@
     <label>Which board?</label>
     </div>
       <div class="col-xs-2">
-    <%= p.collection_select(:board_id, current_user.boards, :id, :name, {}, {class: "form-control"}) %>
+    <%= p.collection_select(:board_id, current_user.pinnable_boards, :id, :name, {}, {class: "form-control"}) %>
     </div>
     </div>
     <%= p.hidden_field :user_id, value: current_user.id %> 

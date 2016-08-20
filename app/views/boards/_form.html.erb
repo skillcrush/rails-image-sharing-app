@@ -16,6 +16,19 @@
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
+
+
+  <% if !@followers.nil? %>
+    <%= f.fields_for :board_pinners do |p| %>
+      <div class="form-group">
+      <%= select_tag "board[board_pinners-attributes][0][user_id]", options_from_collection_for_select(@followers, :id, :full_name), class: "form-control", include_blank: true %>
+      </div>
+    <%end%>
+  <%end%>
+
+
+
+
   <div class="actions">
     <%= f.submit %>
   </div>
