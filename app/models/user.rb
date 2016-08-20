@@ -20,4 +20,12 @@ class User < ActiveRecord::Base
 		 return nil
 	end
 
+	def followed
+		Follower.where("follower_id=?", self.id).map{|f| f.user}
+	end
+
+	def not_followed
+		User.all - self.followed - [self]
+	end
+
 end
