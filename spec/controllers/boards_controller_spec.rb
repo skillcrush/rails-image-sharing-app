@@ -42,6 +42,7 @@ RSpec.describe BoardsController, type: :controller do
   end
   after(:each) do
     if !@user.destroyed?
+      @user.board_pinners.destroy_all
       @user.pinnings.destroy_all
       @user.boards.destroy_all
       @user.destroy

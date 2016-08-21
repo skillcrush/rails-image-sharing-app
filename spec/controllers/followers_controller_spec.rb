@@ -20,6 +20,101 @@ require 'spec_helper'
 
 RSpec.describe FollowersController, type: :controller do
 
+before(:each) do
+  @user = FactoryGirl.create(:user_with_followees)
+  @board = @user.boards.first
+  login(@user)
+end
+
+after(:each) do
+  if !@user.destroyed?
+    Follower.where("follower_id=?", @user.id).destroy_all
+    @user.destroy
+  end
+end
+
+describe "GET index" do
+  it 'renders the index template' do
+    get :index
+    expect(response).to render_template("index")
+  end
+
+  it 'populates @followed with all followed users' do
+    get :index
+    expect(assigns[:followers]).to eq(Follower.all)
+  end
+
+  it "redirects to login if user is not signed in" do
+      logout(@user)
+      get :index
+      expect(response).to redirect_to(:login)
+  end
+end
+
+describe "GET new" do
+  it 'responds with success' do
+    get :new
+    expect(response.success?).to be(true)
+  end
+
+  it 'renders the new view' do
+      get :new      
+      expect(response).to render_template(:new)
+  end
+
+  it 'assigns an instance variable to a new follower' do
+      get :new
+      expect(assigns(:follower)).to be_a_new(Follower)
+  end
+
+  it 'assigns @users to equal the users not followed by @user' do
+    get :new, id: @user.id
+    expect(assigns[:users]).to eq(@user.not_followed)
+  end
+
+  it "redirects to login if user is not signed in" do
+      logout(@user)
+      get :index
+      expect(response).to redirect_to(:login)
+  end
+end
+
+describe "POST create" do
+  before(:each) do
+    @follower_user = FactoryGirl.create(:user)
+    @follower_hash = {
+      user_id: @user.id,
+      follower_id: @follower_user.id
+    }
+  end
+  after(:each) do
+    follower = Follower.where("user_id=? AND follower_id=?", @user.id, @follower_user.id)
+    if !follower.empty?
+      follower.destroy_all
+      @follower_user.destroy
+    end
+  end
+
+  it 'responds with a redirect' do
+    post :create, follower: @follower_hash
+    expect(response.redirect?).to be(true) 
+  end
+
+  #work on this one
+  #it 'creates a follower' do
+  #  post :create, follower: @follower_hash
+  #  expect(Follower.find_by_follower_id(@follower_user_id).present?).to be(true)
+  #end
+
+  it 'redirects to the index view' do
+    post :create, follower: @follower_hash
+    expect(response).to redirect_to(followers_url)
+  end
+
+end
+
+
+=begin
   # This should return the minimal set of attributes required to create a valid
   # Follower. As you add validations to Follower, be sure to
   # adjust the attributes here as well.
@@ -36,13 +131,6 @@ RSpec.describe FollowersController, type: :controller do
   # FollowersController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET #index" do
-    it "assigns all followers as @followers" do
-      follower = Follower.create! valid_attributes
-      get :index, params: {}, session: valid_session
-      expect(assigns(:followers)).to eq([follower])
-    end
-  end
 
   describe "GET #show" do
     it "assigns the requested follower as @follower" do
@@ -155,5 +243,6 @@ RSpec.describe FollowersController, type: :controller do
       expect(response).to redirect_to(followers_url)
     end
   end
+=end
 
 end

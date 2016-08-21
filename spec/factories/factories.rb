@@ -7,7 +7,6 @@ FactoryGirl.define do
   	category Category.find_by_name("rails")
 	end
 
-
 	factory :user do
 	sequence (:email) { |n| "coder#{n}@skillcrush.com"}
 	first_name "Skillcrush"
@@ -21,7 +20,18 @@ FactoryGirl.define do
     			user.pinnings.create(pin: FactoryGirl.create(:pin), board: user.boards.first)
     		end
   		end
+
+  		factory :user_with_boards_and_followers do
+  			after(:create) do |user|
+  				3.times do
+  					follower = FactoryGirl.create(:user)
+  					Follower.create(user: user, follower_id: follower_id)
+  				end
+  			end
+  		end
   	end
+
+
 	
 	factory :user_with_followees do
 		after(:create) do |user|
