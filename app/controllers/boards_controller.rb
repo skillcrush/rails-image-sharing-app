@@ -4,7 +4,7 @@ class BoardsController < ApplicationController
   # GET /boards
   # GET /boards.json
   def index
-    @boards = Board.all
+    @boards = current_user.pinnable_boards
   end
 
   # GET /boards/1
@@ -43,6 +43,8 @@ class BoardsController < ApplicationController
   # PATCH/PUT /boards/1
   # PATCH/PUT /boards/1.json
   def update
+    @board = Board.find(params[:id])
+    @board_pinner = BoardPinner.create!(board_params[:board_pinners_attributes])
     respond_to do |format|
       if @board.update(board_params)
         format.html { redirect_to @board, notice: 'Board was successfully updated.' }

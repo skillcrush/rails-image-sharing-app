@@ -3,7 +3,7 @@ FactoryGirl.define do
 	title "Rails Cheatsheet"
   	url "http://rails-cheat.com"
   	sequence (:slug) { |n| "slug#{n}"}
-  	text "A great tool for beginning developers"	
+  	text "A great tool for beginning developers"
   	category Category.find_by_name("rails")
 	end
 
@@ -25,7 +25,7 @@ FactoryGirl.define do
   			after(:create) do |user|
   				3.times do
   					follower = FactoryGirl.create(:user)
-  					Follower.create(user: user, follower_id: follower_id)
+  					Follower.create(user: user, follower_id: follower.id)
   				end
   			end
   		end

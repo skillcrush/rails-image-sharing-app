@@ -4,6 +4,7 @@ RSpec.describe PinsController do
 before(:each) do
   @user = FactoryGirl.create(:user_with_boards)
   @board = @user.boards.first
+  @board_pinner = BoardPinner.create!(user: @user, board: @board)
   login(@user)
   @pin = FactoryGirl.create(:pin)
 end
@@ -51,6 +52,11 @@ describe "GET new" do
       expect(assigns(:pin)).to be_a_new(Pin)
     end
 
+    it 'assigns @pinnable_boards to all pinnable boards' do
+      get :new
+      expect(assigns[:pinnable_boards]).to eq(@user.pinnable_boards)
+    end
+
     it "redirects to login if user is not signed in" do
       logout(@user)
       get :new
@@ -93,6 +99,19 @@ describe "GET new" do
       post :create, pin: @pin_hash
       expect(response).to redirect_to(pin_url(assigns(:pin)))
     end
+
+    it 'pins to a board for which the user is a board_pinner' do
+      @pin_hash[:pinning_attributes] = []
+      board = @board_pinner.board
+      @pin_hash[:pinning_attributes] << {board_id: board.id, user_id: @user.id}
+      post :create, pin: @pin_hash
+      pinning = BoardPinner.where("user_id=? AND board_id=?", @user.id, @board.id)
+      expect(pinning.present?).to be(true) 
+
+      if pinning.present?
+        pinning.destroy_all
+      end
+    end
     
     it 'redisplays new form on error' do
       # The title is required in the Pin model, so we'll
@@ -110,7 +129,7 @@ describe "GET new" do
       @pin_hash.delete(:title)
       post :create, pin: @pin_hash
       expect(assigns[:errors].present?).to be(true)
-    end  
+    end 
   end
 
 
@@ -215,6 +234,26 @@ describe "POST repin" do
     it 'redirects to the user show page' do
       post :repin, pin: @pin, id: @pin.id, user: @user
       expect(response).to redirect_to(user_path(@user.id))
+    end
+
+    it 'creates a pinning to a board for which the user is a board_pinner' do
+      @pin_hash = { title: @pin.title,
+      url: @pin.url,
+      slug: @pin.slug,
+      category_id: @pin.category_id,
+      text: @pin.text
+    }
+     # image: Rack::Test::UploadedFile.new(Rails.root.join('app/assets/images/rails-logo-thumbnail.png'), 'image/png'), 
+      #user_id: @pin.user_id }
+      board = @board_pinner.board
+      @pin_hash[:pinning] = {board_id: board.id}
+      post :repin, id: @pin.id, pin: @pin_hash
+      pinning = Pinning.where("board_id=?", @board.id)
+      expect(pinning.present?).to be(true) 
+
+      if pinning.present?
+        pinning.destroy_all
+      end
     end
 end
 
