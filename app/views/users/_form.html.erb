@@ -30,4 +30,9 @@
   <div class="actions">
     <%= f.submit %>
   </div>
+
+  
 <% end %>
+<% if !logged_in? %>
+    <%= link_to "Login", login_path %>
+  <%end%>

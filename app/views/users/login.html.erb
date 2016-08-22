@@ -1,4 +1,6 @@
-<h1>Log In</h1>
+
+<div class="header">
+	<h1>Log In</h1>
 
 <%= form_tag "/login" do %>
 <div class="form-group">
@@ -23,8 +25,13 @@
 
 <div class ="row form-row">
     <div class="col-xs-2 col-xs-offset-1">
-<%= submit_tag "Submit" %>
-</div>
+		<%= submit_tag "Submit" %>
+	</div>
+	</div>
+	<div class ="row form-row">
+	<div class="col-xs-2 col-xs-offset-1">
+		<%= link_to "Sign Up", signup_path %>
+	</div>
 </div>
 
 </div>
