@@ -19,7 +19,6 @@ class UsersController < ApplicationController
  # GET /users/new
   def new
     @user = User.new
-    @user.authenticate(params[:email], params[:password])
   end
 
   def authenticate
@@ -50,6 +49,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+         @user.authenticate(params[:email], params[:password])
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
