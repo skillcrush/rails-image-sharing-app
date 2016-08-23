@@ -1,0 +1,45 @@
+
+<div class="header">
+	<h1>Log In</h1>
+
+<%= form_tag "/login" do %>
+<div class="form-group">
+
+	<div class ="row form-row">
+      	<div class="col-xs-1">
+			<label for="email">E-mail</label>
+		</div>
+		<div class="col-xs-2">
+			<%= text_field_tag :email %>
+		</div>
+	</div>
+
+	<div class ="row form-row">
+      	<div class="col-xs-1">
+			<label for="password">Password</label>
+		</div>
+		<div class="col-xs-2">
+			<%= password_field_tag :password %>
+		</div>
+	</div>
+
+<div class ="row form-row">
+    <div class="col-xs-2 col-xs-offset-1">
+		<%= submit_tag "Submit" %>
+	</div>
+	</div>
+	<div class ="row form-row">
+	<div class="col-xs-2 col-xs-offset-1">
+		<%= link_to "Sign Up", signup_path %>
+	</div>
+</div>
+
+</div>
+<%end%>
+
+
+<% if @error.present? %>
+<p class='error'><%= "#{@error}" %></p>
+<%end%>
+
+ 

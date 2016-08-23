@@ -1,3 +1,7 @@
+body {
+  background: url(asset-path('laptop-background.jpg')) no-repeat;
+}
+
 a {
   color: #dd5566;
 }
@@ -19,6 +23,21 @@ h1 {
   background-color: #fff;
   padding: 40px;  
 }
+
 hr{
   clear:both;
+}
+
+.form-row {
+padding: 12px;
+}
+
+
+
+
+
+.error {
+font-style: bold;
+text-align: left;
+color: #B22222;
 }

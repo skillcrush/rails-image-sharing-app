@@ -1,0 +1,22 @@
+<%= form_for @follower, html: {class: "well"} do |f| %>
+
+  <% if @follower.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@follower.errors.count, "error") %> prohibited this follower from being saved:</h2>
+        <ul>
+        <% @follower.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+        </ul>
+    </div>
+  <% end %>
+
+<%= f.hidden_field :user_id, value: user_to_follow.id %>
+<%= f. hidden_field :follower_id, value: current_user.id %>
+<%= f.label :user_name, value: user_to_follow.first_name %>
+<%= f.button :submit, class: "btn btn-default pinterest-theme-button" do %>
+  <i class="fa fa-users"></i>
+  Follow!
+  <%end%>
+
+<% end %>

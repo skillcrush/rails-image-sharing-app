@@ -1,21 +1,57 @@
 <div class="header">
   <h1>
+    <i class="fa fa-laptop"></i>
     <%= "#{@pin.title}" %>
   </h1>
 </div>
 
+
+
 <div class="show-pin">
+<div class="row">
+<div class="col-xs-4">
+<% if (!(@pin.image.url).nil?) %>
+    <img src="<%= @pin.image.url %>" height="300" width="300">
+<% elsif @pin.category_id == 2 %>
+    <%= image_tag('rails-logo-thumbnail.png') %>
+        <% elsif @pin.category_id == 1 %>
+    <%= image_tag('ruby-logo-thumbnail.png') %>
+        <%end%>
+</div>
+<div class="col-xs-4">
   <p><%= "#{@pin.text}" %></p>
 
   <hr/>
   <p>
     <b>Visit <%= "#{@pin.title}" %> at: </b>
-    <a class="url" href="<%= "#{pin.url}" %>" target="_blank">
-      <%= "#{pin.url}" %>
-    </a>
+    <%= link_to "#{@pin.url}", @pin.url, html_options = {target: "_blank", class: "url"} %>
   </p>
+    <%= render partial: "shared/repin_form", locals: {pin: @pin} %>  
+
+  </div>
+
+
+
 </div>
-<br/>
+</div>
+
+ <br/>
 <a href="/">
+  <i class="fa fa-chevron-circle-left" aria-hidden="true"></i>
   Back to Home
 </a>
+<hr/>
+<div class="header">
+  <h3>
+    This pin has been pinned by:
+    </h3>
+    <div>
+      <% @users.each do |user| %>
+        <ul>
+          <li><%= "#{user.first_name} #{user.last_name}" %></li>
+        </ul>
+        <%end%>
+    </div>
+</div>
+
+

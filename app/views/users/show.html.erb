@@ -1,0 +1,48 @@
+<!--<p id="notice"><%= notice %></p>-->
+
+
+<div class="header">
+  <h1>
+    <%= "#{@user.first_name} #{@user.last_name}" %>
+    <h3>Your Pins</h3>
+  </h1>
+</div>
+
+<hr/>
+
+<%= render partial: "shared/pins_list" %>
+
+<hr/>
+
+
+<!--
+
+
+
+
+
+<p>
+  <strong>First name:</strong>
+  <%= @user.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @user.last_name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+
+<div>
+<i class="fa fa-pencil-square" aria-hidden="true"></i>
+<%= link_to 'Edit', edit_user_path(@user) %>
+</div>
+<div>
+<i class="fa fa-chevron-circle-left" aria-hidden="true"></i>
+<%= link_to 'Back', users_path(@user) %>
+</div>
+
+-->
