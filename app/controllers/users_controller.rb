@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   end
 
   def authenticate
-    @user = User.authenticate(params[:email], params[:password])
+    @user = User.authenticate
     if @user.nil?
       @error = "Your email or password is incorrect. Please try again."
       render :login      
